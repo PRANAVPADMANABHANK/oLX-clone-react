@@ -4,6 +4,9 @@ import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { FirebaseContext } from '../../store/Context';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
 export default function Signup() {
   const history = useHistory()
   const [username,setUsername]=useState('');
@@ -11,6 +14,7 @@ export default function Signup() {
   const [phone,setPhone] = useState('');
   const [password,setPassword] = useState('');
   const {firebase} = useContext(FirebaseContext);
+ 
 
   const handleSubmit = (event)=>{
     event.preventDefault();
@@ -84,7 +88,9 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          Login
+        </Link>
       </div>
     </div>
   );

@@ -1,22 +1,27 @@
-import React , {useState, useContext}from 'react';
-import { FirebaseContext } from '../../store/Context';
-import Logo from '../../olx-logo.png';
-import './Login.css';
-import {useHistory}  from 'react-router-dom'
+import React, { useState, useContext } from "react";
+import { FirebaseContext } from "../../store/Context";
+import Logo from "../../olx-logo.png";
+import "./Login.css";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail]=useState('')
-  const [password,setPassword] = useState('')
-  const {firebase} = useContext(FirebaseContext)
-  const history = useHistory()
-  const handleLogin = (event) =>{
-    event.preventDefault()
-    firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{
-      history.push('/')
-    }).catch((error)=>{
-      alert(error.message)
-    })
-  }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { firebase } = useContext(FirebaseContext);
+  const history = useHistory();
+  const handleLogin = (event) => {
+    event.preventDefault();
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        history.push("/");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
   return (
     <div>
       <div className="loginParentDiv">
@@ -28,7 +33,7 @@ function Login() {
             className="input"
             type="email"
             value={email}
-            onChange={(event)=>setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             id="fname"
             name="email"
             defaultValue="John"
@@ -40,7 +45,7 @@ function Login() {
             className="input"
             type="password"
             value={password}
-            onChange={(event)=>setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             id="lname"
             name="password"
             defaultValue="Doe"
@@ -49,7 +54,9 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          Signup
+        </Link>
       </div>
     </div>
   );
